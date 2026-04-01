@@ -1,5 +1,5 @@
 import { ConfigProvider } from "antd";
-import AppRoutes from "@/routes/AppRoutes";
+import AppRoutes from "@/AppRoutes";
 
 function App() {
     return (

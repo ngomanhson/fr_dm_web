@@ -1,9 +1,8 @@
 import { Fragment, Suspense, type ElementType } from "react";
 import { Routes, Route } from "react-router-dom";
-import type { AppRoute } from "./type";
-import publicRoutes from "./public.routes";
-import privateRoutes from "./private.routes";
+import type { AppRoute } from "@/routes/type";
 import DefaultLayout from "@/components/layouts/DefaultLayout";
+import { publicRoutes, privateRoutes } from "@/routes";
 
 const renderRoutes = (routes: AppRoute[]) => {
     return routes.map((route: AppRoute, index: number) => {

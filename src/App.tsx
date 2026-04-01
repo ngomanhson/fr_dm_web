@@ -1,21 +1,19 @@
 import { ConfigProvider } from "antd";
-import styles from "./App.module.scss";
+import AppRoutes from "@/routes/AppRoutes";
 
 function App() {
-  return (
-   <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: "#1677ff",
-          borderRadius: 8,
-        },
-      }}
-    >
-      <div className={styles.container}>
-        <h1>Hello World</h1>
-      </div>
-    </ConfigProvider>
-  );
+    return (
+        <ConfigProvider
+            theme={{
+                token: {
+                    colorPrimary: "#1677ff",
+                    borderRadius: 8,
+                },
+            }}
+        >
+            <AppRoutes />
+        </ConfigProvider>
+    );
 }
 
-export default App
+export default App;

@@ -2,9 +2,10 @@ import { Fragment, Suspense, type ElementType } from "react";
 import { Routes, Route } from "react-router-dom";
 import type { AppRoute } from "@/routes/type";
 import DefaultLayout from "@/components/layouts/DefaultLayout";
-import { publicRoutes, privateRoutes } from "@/routes";
+import { publicRoutes, privateRoutes, authRoutes } from "@/routes";
 
 const renderRoutes = (routes: AppRoute[]) => {
+    // TODO: handle redirect when call api login success
     return routes.map((route: AppRoute, index: number) => {
         const Page = route.component;
         let Layout: ElementType = DefaultLayout;
@@ -35,6 +36,7 @@ function AppRoutes() {
             <Routes>
                 {renderRoutes(publicRoutes)}
                 {renderRoutes(privateRoutes)}
+                {renderRoutes(authRoutes)}
             </Routes>
         </Suspense>
     );

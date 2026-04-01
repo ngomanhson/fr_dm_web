@@ -7,7 +7,7 @@ export default function AppHeader() {
   return (
     <Header className={styles.header}>
       <div>Trang chủ / Huyện/thị xã</div>
-      <div>Vietsoft 🇻🇳</div>
+      <div>Vinorsoft 🇻🇳</div>
     </Header>
   );
 }

@@ -11,10 +11,14 @@
   },
   "dependencies": {
     "@ant-design/icons": "^6.1.1",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@hookform/resolvers": "^5.2.2",
     "antd": "^5.29.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router-dom": "^7.13.2"
+    "react-hook-form": "^7.72.0",
+    "react-router-dom": "^7.13.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

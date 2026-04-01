@@ -9,7 +9,7 @@ import {
     ResponsiveContainer,
     LabelList,
 } from "recharts";
-import styles from "../../styles.module.scss";
+import styles from "../styles.module.scss";
 
 const objectData = [
     { date: "13/03/2025", insurance: 15000000, service: 10000000 },

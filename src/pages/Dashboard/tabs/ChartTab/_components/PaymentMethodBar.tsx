@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Select, Typography } from "antd";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import styles from "../../styles.module.scss";
+import styles from "../styles.module.scss";
 
 const { Text } = Typography;
 

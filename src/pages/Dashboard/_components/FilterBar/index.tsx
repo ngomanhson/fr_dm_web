@@ -1,10 +1,8 @@
 import React from "react";
-import { DatePicker, Button, Typography } from "antd";
+import { DatePicker, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
-import styles from "../../styles.module.scss";
-
-const { Text } = Typography;
+import styles from "./styles.module.scss";
 
 const FilterBar: React.FC = () => {
     const today = dayjs();
@@ -19,29 +17,21 @@ const FilterBar: React.FC = () => {
 
     return (
         <div className={styles.filter}>
-            <div className={styles.filter__group}>
-                <div className={styles.filter__inputs}>
-                    <div className={styles.filter__item}>
-                        <Text className={styles.filter__label}>Từ Ngày</Text>
-                        <DatePicker
-                            defaultValue={today}
-                            format="DD/MM/YYYY"
-                            placeholder="Chọn ngày"
-                            className={styles.filter__picker}
-                            disabledDate={disabledDate}
-                        />
-                    </div>
-                    <div className={styles.filter__item}>
-                        <Text className={styles.filter__label}>Đến Ngày</Text>
-                        <DatePicker
-                            defaultValue={today}
-                            format="DD/MM/YYYY"
-                            placeholder="Chọn ngày"
-                            className={styles.filter__picker}
-                            disabledDate={disabledDate}
-                        />
-                    </div>
-                </div>
+            <div className={styles.filter__inputs}>
+                <DatePicker
+                    defaultValue={today}
+                    format="DD/MM/YYYY"
+                    placeholder="Chọn ngày"
+                    className={styles.filter__picker}
+                    disabledDate={disabledDate}
+                />
+                <DatePicker
+                    defaultValue={today}
+                    format="DD/MM/YYYY"
+                    placeholder="Chọn ngày"
+                    className={styles.filter__picker}
+                    disabledDate={disabledDate}
+                />
             </div>
             <Button
                 type="primary"

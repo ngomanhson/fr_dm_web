@@ -1,33 +1,24 @@
 import styles from "./styles.module.scss";
-import RevenueObjectChart from "./_components/RevenueByObject";
-import PaymentMethodBar from "./_components/PaymentMethodBar";
-import PaymentPieChart from "./_components/PaymentMethodPie";
 import FilterBar from "./_components/FilterBar";
+import { Tabs } from "antd";
+import { dashboardTabs } from "./tabs/config";
 
 export default function DashboardPage() {
     return (
         <div className={styles.dashboard}>
             <div className={styles.dashboard__container}>
                 <header className={styles.dashboard__header}>
-                    <h1 className={styles.dashboard__headerTitle}>
-                        BÁO CÁO DOANH THU TỔNG HỢP TOÀN BỆNH VIỆN THEO NGÀY
-                    </h1>
+                    <h1 className={styles.dashboard__headerTitle}>DOANH THU THEO NGÀY</h1>
+                    <FilterBar />
                 </header>
 
-                <FilterBar />
-
-                <div className={styles.dashboard__content}>
-                    <RevenueObjectChart />
-
-                    <div className={styles.dashboard__row}>
-                        <div className={styles.dashboard__col}>
-                            <PaymentMethodBar />
-                        </div>
-                        <div className={styles.dashboard__col}>
-                            <PaymentPieChart />
-                        </div>
-                    </div>
-                </div>
+                <Tabs
+                    items={dashboardTabs.map((tab) => ({
+                        key: tab.key,
+                        label: tab.label,
+                        children: <tab.component />,
+                    }))}
+                />
             </div>
         </div>
     );

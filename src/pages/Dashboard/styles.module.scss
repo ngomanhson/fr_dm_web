@@ -1,7 +1,5 @@
 .dashboard {
-    background-color: #f0f2f5;
     min-height: 100vh;
-    padding: 24px;
 
     &__container {
         max-width: 1400px;
@@ -12,7 +10,9 @@
     }
 
     &__header {
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         margin-bottom: 24px;
 
         &Title {
@@ -21,151 +21,7 @@
             font-weight: 700;
             text-transform: uppercase;
             margin: 0;
+            text-transform: uppercase;
         }
-    }
-
-    &__content {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-
-    &__row {
-        display: flex;
-        gap: 24px;
-    }
-
-    &__col {
-        flex: 1;
-        min-width: 0;
-    }
-}
-
-// Block Filter
-.filter {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 24px;
-    padding: 16px;
-    background: #fdfdfd;
-    border: 1px solid #f0f0f0;
-
-    &__inputs {
-        display: flex;
-        gap: 24px;
-    }
-
-    &__wrapper {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    &__label {
-        font-weight: 500;
-        white-space: nowrap;
-    }
-
-    &__picker {
-        width: 150px;
-    }
-
-    &__item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    &__button {
-        background-color: #1890ff;
-        height: 32px;
-        display: flex;
-        align-items: center;
-    }
-}
-
-// Block Chart Card
-.chartCard {
-    border: 1px solid #e8e8e8;
-    border-radius: 8px;
-    padding: 20px;
-    background: #fff;
-    height: 100%;
-
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-    }
-
-    &__title {
-        text-align: center;
-        font-size: 18px;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    &__subtitle {
-        font-size: 16px;
-        font-weight: 600;
-        color: #2c5a7a;
-        margin: 0;
-    }
-
-    &__titleCenter {
-        text-align: center;
-        font-size: 16px;
-        color: #333;
-        margin-bottom: 15px;
-        span {
-            font-size: 13px;
-            color: #8c8c8c;
-            font-weight: normal;
-        }
-    }
-}
-
-// Block Stats
-.statGroup {
-    display: flex;
-    gap: 40px;
-    margin-bottom: 20px;
-
-    &__label {
-        display: block;
-        color: #595959;
-        font-size: 13px;
-        margin-bottom: 4px;
-    }
-
-    &__price {
-        font-size: 22px;
-        font-weight: 700;
-        color: #262626;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    &__deliver {
-        font-size: 14px;
-        color: #595959;
-        margin-top: 8px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    &__tag {
-        color: #52c41a;
-        background-color: #e7ffdb;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-weight: 600;
-        font-size: 12px;
     }
 }

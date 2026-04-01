@@ -1,6 +1,6 @@
 import React from "react";
 import { PieChart, Pie, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import styles from "../../styles.module.scss";
+import styles from "../styles.module.scss";
 
 const paymentPieData = [
     { name: "Tiền mặt", value: 15, fill: "#2c5a7a" },
@@ -29,7 +29,7 @@ const PaymentPieChart: React.FC = () => {
                             labelLine={false}
                         />
                         <Tooltip />
-                        <Legend verticalAlign="bottom" align="center" iconType="circle" />
+                        <Legend verticalAlign="bottom" align="center" iconType="square" />
                     </PieChart>
                 </ResponsiveContainer>
             </div>

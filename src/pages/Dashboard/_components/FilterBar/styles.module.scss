@@ -1,0 +1,39 @@
+.filter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+
+    &__inputs {
+        display: flex;
+        gap: 15px;
+    }
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__label {
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    &__picker {
+        width: 150px;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__button {
+        background-color: #1890ff;
+        height: 32px;
+        display: flex;
+        align-items: center;
+    }
+}

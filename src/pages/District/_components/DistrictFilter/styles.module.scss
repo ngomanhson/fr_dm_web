@@ -1,0 +1,17 @@
+.filter {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 25px;
+
+
+  &__field {
+    min-width: 300px;
+  }
+
+  &__actions {
+    margin-left: auto;
+    display: flex;
+    gap: 12px;
+  }
+}

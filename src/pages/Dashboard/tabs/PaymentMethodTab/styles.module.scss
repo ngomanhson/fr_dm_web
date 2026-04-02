@@ -1,0 +1,86 @@
+.wrapper {
+    :global {
+        .ant-table-tbody > tr > td {
+            background-color: #ffffff !important;
+            font-weight: 400 !important;
+        }
+
+        .ant-table-thead > tr > th {
+            text-align: center !important;
+            padding: 8px !important;
+        }
+    }
+}
+
+.headerBlue {
+    background-color: #f0faff !important;
+    color: #000 !important;
+    vertical-align: middle !important;
+    font-weight: 600 !important;
+}
+
+.headerGreen {
+    background-color: #d9ead3 !important;
+    color: #000 !important;
+    font-weight: 600 !important;
+}
+
+.headerPink {
+    background-color: #fce4ec !important;
+    color: #000 !important;
+    font-weight: 600 !important;
+}
+
+.summaryRow {
+    :global(.ant-table-cell) {
+        background-color: #ffffff !important;
+        font-weight: 400 !important;
+        border-top: 1px solid #f0f0f0 !important;
+    }
+}
+
+.pagination {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__total {
+        color: var(--ant-color-text);
+    }
+
+    &__label {
+        color: var(--ant-color-text);
+    }
+
+    &__select {
+        width: 110px;
+
+        :global(.ant-select-selector) {
+            width: 100%;
+        }
+    }
+
+    &__input {
+        width: 50px;
+        text-align: center;
+    }
+
+    &__antd {
+        :global(.ant-pagination-item) {
+            border-radius: 50%;
+        }
+    }
+}

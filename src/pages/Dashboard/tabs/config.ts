@@ -1,4 +1,6 @@
 import ChartTab from "./ChartTab";
+import ObjectTab from "./ObjectTab";
+import PaymentMethodTab from "./PaymentMethodTab";
 
 export const dashboardTabs = [
     {
@@ -9,11 +11,11 @@ export const dashboardTabs = [
     {
         key: "objects",
         label: "Đối tượng",
-        component: ChartTab,
+        component: ObjectTab,
     },
     {
         key: "paymentMethods",
         label: "Hình thức thanh toán",
-        component: ChartTab,
+        component: PaymentMethodTab,
     },
 ];

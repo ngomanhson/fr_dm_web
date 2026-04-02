@@ -1,22 +1,30 @@
 import { Select, Input, Form, Button } from "antd";
 import styles from "./styles.module.scss";
 import { SearchOutlined } from "@ant-design/icons";
-import UploadFile from "@/components/UploadButton";
+import UploadButton from "@/components/UploadButton";
 
-export default function WardFilter() {
+export default function WardFilter({ onSearch, onImport }: any) {
+    const [form] = Form.useForm();
     return (
-        <Form layout="vertical" className={styles.filter}>
-            <Form.Item label="Quận / Huyện" className={styles.filter__field}>
-                <Select placeholder="Chọn" options={[{ label: "Hà Nội", value: 1 }]} />
-            </Form.Item>
+        <Form form={form} layout="vertical" onFinish={onSearch} className={styles.filter}>
+            <div className={styles.filter__inputs}>
+                <Form.Item label="Quận / Huyện" className={styles.filter__field}>
+                    <Select
+                        placeholder="Chọn"
+                        showSearch
+                        optionFilterProp="label"
+                        options={[{ label: "Hà Nội", value: 1 }]}
+                    />
+                </Form.Item>
 
-            <Form.Item label="Mã xã/phường" className={styles.filter__field}>
-                <Input maxLength={25} placeholder="Nhập" />
-            </Form.Item>
+                <Form.Item label="Mã xã/phường" name="code" className={styles.filter__field}>
+                    <Input maxLength={25} placeholder="Nhập" />
+                </Form.Item>
+            </div>
 
             <div className={styles.filter__actions}>
-                <UploadFile onChange={(file) => console.log(file)} />
-                <Button type="primary" icon={<SearchOutlined />}>
+                <UploadButton onImport={onImport} title="Import xã/phường" />
+                <Button type="primary" htmlType="submit" icon={<SearchOutlined />}>
                     Tìm kiếm
                 </Button>
             </div>

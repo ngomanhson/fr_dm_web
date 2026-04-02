@@ -22,7 +22,9 @@ function PaginationTable({
         <div className={styles.pagination}>
             {/* left */}
             <div className={styles.pagination__left}>
-                <span className={styles.pagination__total}>Tổng: {total} bản ghi</span>
+                <span className={styles.pagination__total}>
+                    Tổng: {total.toLocaleString("vn-VN")} bản ghi
+                </span>
 
                 <Pagination
                     current={page}

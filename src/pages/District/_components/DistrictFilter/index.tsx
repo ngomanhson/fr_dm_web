@@ -1,33 +1,34 @@
-import { Select, Input, Form, Button, Upload } from "antd";
+import { Form, Input, Select, Button } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import UploadButton from "@/components/UploadButton";
 import styles from "./styles.module.scss";
-import { SearchOutlined, UploadOutlined } from "@ant-design/icons";
 
-export default function DistrictFilter() {
-  return (
-    <Form layout="vertical" className={styles.filter}>
-      <Form.Item label="Tên tỉnh/TP" className={styles.filter__field}>
-        <Select
-          placeholder="Tên tỉnh/TP"
-          options={[{ label: "Hà Nội", value: 1 }]}
-        />
-      </Form.Item>
+export default function DistrictFilter({ onSearch, onImport }: any) {
+    const [form] = Form.useForm();
 
-      <Form.Item label="Tên huyện/thị xã" className={styles.filter__field}>
-        <Input placeholder="Tên huyện/thị xã" />
-      </Form.Item>
+    return (
+        <Form form={form} layout="vertical" onFinish={onSearch} className={styles.filter}>
+            <div className={styles.filter__inputs}>
+                <Form.Item label="Tỉnh/TP" name="province" className={styles.filter__field}>
+                    <Select
+                        showSearch
+                        optionFilterProp="label"
+                        placeholder="Chọn tỉnh"
+                        options={[{ label: "Hà Nội", value: "HN" }]}
+                    />
+                </Form.Item>
 
-      {/* Actions */}
-      <div className={styles.filter__actions}>
-        <Upload
-          beforeUpload={() => false} // 🔥 không auto upload
-          showUploadList={false}
-        >
-          <Button icon={<UploadOutlined />}>Import file</Button>
-        </Upload>
-        <Button type="primary" icon={<SearchOutlined />}>
-          Tìm kiếm
-        </Button>
-      </div>
-    </Form>
-  );
+                <Form.Item label="Tên huyện/thị xã" name="name" className={styles.filter__field}>
+                    <Input maxLength={250} />
+                </Form.Item>
+            </div>
+
+            <div className={styles.filter__actions}>
+                <UploadButton onImport={onImport} title="Import huyện/thị xã" />
+                <Button type="primary" htmlType="submit" icon={<SearchOutlined />}>
+                    Tìm kiếm
+                </Button>
+            </div>
+        </Form>
+    );
 }

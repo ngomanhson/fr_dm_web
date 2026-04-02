@@ -1,8 +1,9 @@
 .filter {
-    display: flex;
-    align-items: flex-end;
-    gap: 12px;
-    margin-bottom: 25px;
+    &__inputs {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
 
     &__field {
         min-width: 300px;
@@ -11,6 +12,9 @@
     &__actions {
         margin-left: auto;
         display: flex;
+        align-items: center;
+        justify-content: flex-end;
         gap: 12px;
+        margin-bottom: 20px;
     }
 }

@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import type { AppRoute } from "@/routes/type";
 import DefaultLayout from "@/components/layouts/DefaultLayout";
 import { publicRoutes, privateRoutes, authRoutes } from "@/routes";
+import Loader from "@/components/Loader";
 
 const renderRoutes = (routes: AppRoute[]) => {
     // TODO: handle redirect when call api login success
@@ -32,7 +33,7 @@ const renderRoutes = (routes: AppRoute[]) => {
 
 function AppRoutes() {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
             <Routes>
                 {renderRoutes(publicRoutes)}
                 {renderRoutes(privateRoutes)}

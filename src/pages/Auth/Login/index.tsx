@@ -1,16 +1,6 @@
 import { useState } from "react";
-import {
-    Button,
-    Input,
-    Typography,
-    Divider,
-    Card,
-} from "antd";
-import {
-    MailOutlined,
-    LockOutlined,
-    GoogleOutlined,
-} from "@ant-design/icons";
+import { Button, Input, Typography, Divider, Card } from "antd";
+import { MailOutlined, LockOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginBody, type LoginBodyType } from "@/schemas/auth.schema";
@@ -21,7 +11,7 @@ import routes from "@/configs/routes";
 const { Text, Title } = Typography;
 
 export default function LoginForm() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
     const form = useForm<LoginBodyType>({
@@ -38,11 +28,12 @@ export default function LoginForm() {
         setLoading(true);
         try {
             console.log(data);
-            navigate(routes.dashboard)
+            navigate(routes.dashboard);
         } catch (err) {
             form.setError("root", {
                 message: "Login failed",
             });
+            console.log(err);
         } finally {
             setLoading(false);
         }
@@ -52,7 +43,6 @@ export default function LoginForm() {
         <div className={styles.container}>
             <Card className={styles.card} bodyStyle={{ padding: 0 }}>
                 <div className={styles.wrapper}>
-
                     {/* LEFT - IMAGE */}
                     <div className={styles.image}>
                         <img src={LoginDecor} alt="login" />
@@ -67,9 +57,7 @@ export default function LoginForm() {
                         >
                             <div className={styles.header}>
                                 <Title level={3}>Chào mừng quay lại</Title>
-                                <Text type="secondary">
-                                    Đăng nhập để tiếp tục sử dụng hệ thống
-                                </Text>
+                                <Text type="secondary">Đăng nhập để tiếp tục sử dụng hệ thống</Text>
                             </div>
                             {/* Email */}
                             <div className={styles.field}>
@@ -84,11 +72,7 @@ export default function LoginForm() {
                                             size="large"
                                             placeholder="Enter your email"
                                             prefix={<MailOutlined />}
-                                            status={
-                                                form.formState.errors.email
-                                                    ? "error"
-                                                    : ""
-                                            }
+                                            status={form.formState.errors.email ? "error" : ""}
                                         />
                                     )}
                                 />
@@ -111,11 +95,7 @@ export default function LoginForm() {
                                             size="large"
                                             placeholder="********"
                                             prefix={<LockOutlined />}
-                                            status={
-                                                form.formState.errors.password
-                                                    ? "error"
-                                                    : ""
-                                            }
+                                            status={form.formState.errors.password ? "error" : ""}
                                         />
                                     )}
                                 />
@@ -144,11 +124,7 @@ export default function LoginForm() {
 
                             <Divider>Hoặc tiếp tục với</Divider>
 
-                            <Button
-                                icon={<GoogleOutlined />}
-                                size="large"
-                                block
-                            >
+                            <Button icon={<GoogleOutlined />} size="large" block>
                                 Đăng nhập với Google
                             </Button>
                         </form>

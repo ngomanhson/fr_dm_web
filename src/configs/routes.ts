@@ -1,6 +1,7 @@
 const routes = {
     dashboard: "/",
     district: "/districts",
+    ward: "/wards",
     login: "/login",
     not_found: "*",
 } as const;

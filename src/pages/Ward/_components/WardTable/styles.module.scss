@@ -1,0 +1,11 @@
+.wrapper {
+    background: #fff;
+    padding: 12px;
+    border-radius: 6px;
+
+    :global(.table__header-cell) {
+        text-align: center;
+        background-color: #f0f9ff !important;
+        font-weight: 600;
+    }
+}

@@ -1,12 +1,13 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState, useCallback } from "react";
 import { Button, Layout } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
+import { ExpandAltOutlined, CompressOutlined, MenuOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import config from "@/configs";
 import Logo from "@/assets/images/logo.png";
 import styles from "./styles.module.scss";
 
 const { Header } = Layout;
+
 interface AppHeaderProps {
     onMenuClick: () => void;
     title: string;
@@ -15,9 +16,31 @@ interface AppHeaderProps {
 const AppHeader: React.FC<AppHeaderProps> = ({ onMenuClick, title }) => {
     const isHome = useMemo(() => title === "Trang chủ", [title]);
 
+    const [isFullscreen, setIsFullscreen] = useState(false);
+
+    useEffect(() => {
+        const handleChange = () => {
+            setIsFullscreen(!!document.fullscreenElement);
+        };
+
+        document.addEventListener("fullscreenchange", handleChange);
+
+        return () => {
+            document.removeEventListener("fullscreenchange", handleChange);
+        };
+    }, []);
+
+    const toggleFullscreen = useCallback(() => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }, []);
+
     return (
         <Header className={styles.header}>
-            <div className={styles.left}>
+            <div className={styles.header__left}>
                 <Button
                     type="text"
                     icon={<MenuOutlined />}
@@ -31,14 +54,27 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onMenuClick, title }) => {
 
                 <nav className={styles.breadcrumb}>
                     <Link to={config.routes.dashboard} className={styles.breadcrumb__title}>
-                        Trang chủ{" "}
+                        Trang chủ
                     </Link>
+
                     {!isHome && <span>/ {title}</span>}
                 </nav>
             </div>
 
-            <div className={styles.right}>
-                <span className={styles.brandName}>Vinorsoft 🇻🇳</span>
+            <div className={styles.header__right}>
+                <span>Vinorsoft 🇻🇳</span>
+
+                <Button
+                    type="text"
+                    onClick={toggleFullscreen}
+                    icon={
+                        isFullscreen ? (
+                            <CompressOutlined className={styles["header__right--icon"]} />
+                        ) : (
+                            <ExpandAltOutlined className={styles["header__right--icon"]} />
+                        )
+                    }
+                />
             </div>
         </Header>
     );

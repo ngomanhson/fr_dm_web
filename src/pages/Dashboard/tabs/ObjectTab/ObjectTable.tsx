@@ -1,8 +1,9 @@
-import { Table, Pagination, Select } from "antd";
+import { Table } from "antd";
 import { useState } from "react";
 import styles from "../../styles.module.scss";
 import type { ColumnsType } from "antd/es/table";
 import { objectData, type ObjectData } from "@/mocks/object.data";
+import PaginationTable from "@/components/PaginationTable";
 
 export default function ObjectTable() {
     const [page, setPage] = useState(1);
@@ -56,38 +57,13 @@ export default function ObjectTable() {
                 rowKey="key"
             />
 
-            <div className={styles.pagination}>
-                {/* left */}
-                <div className={styles.pagination__left}>
-                    <span className={styles.pagination__total}>Tổng: {total} bản ghi</span>
-
-                    <Pagination
-                        current={page}
-                        pageSize={pageSize}
-                        total={total}
-                        onChange={(p) => setPage(p)}
-                        showSizeChanger={false}
-                        className={styles.pagination__antd}
-                    />
-                </div>
-
-                {/* right */}
-                <div className={styles.pagination__right}>
-                    <Select
-                        value={pageSize}
-                        className={styles.pagination__select}
-                        options={[
-                            { value: 10, label: "10 / trang" },
-                            { value: 15, label: "15 / trang" },
-                            { value: 20, label: "20 / trang" },
-                        ]}
-                        onChange={(value) => {
-                            setPageSize(value);
-                            setPage(1);
-                        }}
-                    />
-                </div>
-            </div>
+            <PaginationTable
+                page={page}
+                setPage={setPage}
+                pageSize={pageSize}
+                setPageSize={setPageSize}
+                total={total}
+            />
         </div>
     );
 }

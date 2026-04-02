@@ -2,6 +2,9 @@ import { Button, Layout } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import styles from "./styles.module.scss";
 import React from "react";
+import { Link } from "react-router-dom";
+import config from "@/configs";
+import Logo from "@/assets/images/logo.png";
 
 const { Header } = Layout;
 
@@ -19,6 +22,9 @@ function AppHeader({ onMenuClick }: Props) {
                     onClick={onMenuClick}
                     className={styles.mobileBtn}
                 />
+                <Link to={config.routes.dashboard} className={styles.logo}>
+                    <img src={Logo} alt="Vinorsoft" className={styles.logo__img} />
+                </Link>
                 <span className={styles.breadcrumb}>Trang chủ / Huyện/thị xã</span>
             </div>
 

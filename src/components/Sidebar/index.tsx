@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { Layout, Menu, Input, Drawer, Button, Grid } from "antd";
 import { SearchOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import styles from "./styles.module.scss";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const { Sider } = Layout;
 const { useBreakpoint } = Grid;
@@ -12,24 +13,34 @@ interface SidebarProps {
 }
 
 const menuItems = [
-    { key: "1", label: "Loại đặt hẹn" },
-    { key: "2", label: "Loại chính sách" },
-    { key: "3", label: "Phương thức đặt hẹn" },
-    { key: "4", label: "Lý do thăm khám" },
-    { key: "5", label: "Huyện/thị xã" },
-    { key: "6", label: "Xã/phường" },
-    { key: "7", label: "Tỉnh/thành phố" },
-    { key: "8", label: "Danh mục thẻ" },
+    { key: "/appointment-types", label: "Loại đặt hẹn" },
+    { key: "/policy-types", label: "Loại chính sách" },
+    { key: "/booking-methods", label: "Phương thức đặt hẹn" },
+    { key: "/visit-reasons", label: "Lý do thăm khám" },
+    { key: "/districts", label: "Huyện/thị xã" },
+    { key: "/wards", label: "Xã/phường" },
+    { key: "/provinces", label: "Tỉnh/thành phố" },
+    { key: "/card-categories", label: "Danh mục thẻ" },
 ];
 
 export default function Sidebar({ openMobile, setOpenMobile }: SidebarProps) {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [collapsed, setCollapsed] = useState(false);
     const screens = useBreakpoint();
+    const selectedKeys = useMemo(() => {
+        return [location.pathname];
+    }, [location.pathname]);
+
+    const handleMenuClick = (e: any) => {
+        navigate(e.key);
+    };
 
     const isMobile = useMemo(() => !screens.md, [screens.md]);
 
     const toggleCollapse = () => setCollapsed((prev) => !prev);
-    // TODO: Tách menuItems ra file riêng nếu có nhiều hơn 10 mục để tránh file quá dài, dễ bảo trì hơn.
+
+    // TODO: Tách menuItems ra component riêng
     const content = (
         <div className={styles.wrapper}>
             <div className={styles.searchContainer}>
@@ -38,9 +49,10 @@ export default function Sidebar({ openMobile, setOpenMobile }: SidebarProps) {
 
             <Menu
                 mode="inline"
-                defaultSelectedKeys={["5"]}
                 items={menuItems}
                 className={styles.menu}
+                selectedKeys={selectedKeys}
+                onClick={handleMenuClick}
             />
 
             {!isMobile && (

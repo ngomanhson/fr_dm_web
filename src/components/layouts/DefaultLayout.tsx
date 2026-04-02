@@ -2,6 +2,9 @@ import { Layout } from "antd";
 import { useState, useCallback } from "react";
 import AppHeader from "../AppHeader";
 import Sidebar from "../Sidebar";
+import { useLocation } from "react-router-dom";
+import { useMemo } from "react";
+import { menuItems } from "@/mocks/sidebar.data";
 
 const { Content } = Layout;
 
@@ -16,9 +19,16 @@ export default function DefaultLayout({ children }: { children: React.ReactNode 
     const openMenu = useCallback(() => setOpenMobile(true), []);
     const closeMenu = useCallback(() => setOpenMobile(false), []);
 
+    const location = useLocation();
+
+    const currentTitle = useMemo(() => {
+        const found = menuItems.find((item) => location.pathname.startsWith(item.key));
+        return found?.label || "Trang chủ";
+    }, [location.pathname]);
+
     return (
         <Layout style={{ minHeight: "100vh" }}>
-            <AppHeader onMenuClick={openMenu} />
+            <AppHeader onMenuClick={openMenu} title={currentTitle} />
 
             <Layout style={{ marginTop: 64 }}>
                 <Sidebar openMobile={openMobile} setOpenMobile={closeMenu} />

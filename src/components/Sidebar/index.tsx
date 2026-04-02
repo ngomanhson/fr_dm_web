@@ -3,6 +3,7 @@ import { Layout, Menu, Input, Drawer, Button, Grid } from "antd";
 import { SearchOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import styles from "./styles.module.scss";
 import { useLocation, useNavigate } from "react-router-dom";
+import { menuItems } from "@/mocks/sidebar.data";
 
 const { Sider } = Layout;
 const { useBreakpoint } = Grid;
@@ -11,17 +12,6 @@ interface SidebarProps {
     openMobile: boolean;
     setOpenMobile: (open: boolean) => void;
 }
-
-const menuItems = [
-    { key: "/appointment-types", label: "Loại đặt hẹn" },
-    { key: "/policy-types", label: "Loại chính sách" },
-    { key: "/booking-methods", label: "Phương thức đặt hẹn" },
-    { key: "/visit-reasons", label: "Lý do thăm khám" },
-    { key: "/districts", label: "Huyện/thị xã" },
-    { key: "/wards", label: "Xã/phường" },
-    { key: "/provinces", label: "Tỉnh/thành phố" },
-    { key: "/card-categories", label: "Danh mục thẻ" },
-];
 
 export default function Sidebar({ openMobile, setOpenMobile }: SidebarProps) {
     const navigate = useNavigate();

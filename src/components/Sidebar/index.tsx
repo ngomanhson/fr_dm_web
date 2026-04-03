@@ -1,8 +1,9 @@
 import { useState, useMemo } from "react";
-import { Layout, Menu, Input, Drawer, Button, Grid } from "antd";
+import { Layout, Menu, Drawer, Button, Grid, Form } from "antd";
 import { SearchOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import styles from "./styles.module.scss";
 import { useLocation, useNavigate } from "react-router-dom";
+import InputItem from "@/components/InputItem";
 import { menuItems } from "@/mocks/sidebar.data";
 
 const { Sider } = Layout;
@@ -16,30 +17,46 @@ interface SidebarProps {
 export default function Sidebar({ openMobile, setOpenMobile }: SidebarProps) {
     const navigate = useNavigate();
     const location = useLocation();
-    const [collapsed, setCollapsed] = useState(false);
     const screens = useBreakpoint();
+
+    const [collapsed, setCollapsed] = useState(false);
+    const [keyword, setKeyword] = useState("");
+
+    const isMobile = !screens.md;
+
     const selectedKeys = useMemo(() => {
-        return [location.pathname];
+        const found = menuItems.find((item) => location.pathname.startsWith(item.key));
+        return [found?.key || location.pathname];
     }, [location.pathname]);
 
     const handleMenuClick = (e: any) => {
         navigate(e.key);
+        if (isMobile) setOpenMobile(false);
     };
 
-    const isMobile = useMemo(() => !screens.md, [screens.md]);
+    const filteredMenu = useMemo(() => {
+        if (!keyword) return menuItems;
 
-    const toggleCollapse = () => setCollapsed((prev) => !prev);
+        const lower = keyword.toLowerCase();
+        return menuItems.filter((item) => item.label.toLowerCase().includes(lower));
+    }, [keyword]);
 
     // TODO: Tách menuItems ra component riêng
     const content = (
         <div className={styles.wrapper}>
             <div className={styles.searchContainer}>
-                <Input placeholder="Tìm kiếm" prefix={<SearchOutlined />} />
+                <Form>
+                    <InputItem
+                        placeholder="Tìm kiếm"
+                        prefix={<SearchOutlined />}
+                        onChange={(e: any) => setKeyword(e.target.value)}
+                    />
+                </Form>
             </div>
 
             <Menu
                 mode="inline"
-                items={menuItems}
+                items={filteredMenu}
                 className={styles.menu}
                 selectedKeys={selectedKeys}
                 onClick={handleMenuClick}
@@ -47,7 +64,11 @@ export default function Sidebar({ openMobile, setOpenMobile }: SidebarProps) {
 
             {!isMobile && (
                 <div className={styles.footer}>
-                    <Button type="text" icon={<MenuFoldOutlined />} onClick={toggleCollapse} />
+                    <Button
+                        type="text"
+                        icon={<MenuFoldOutlined />}
+                        onClick={() => setCollapsed((prev) => !prev)}
+                    />
                 </div>
             )}
         </div>

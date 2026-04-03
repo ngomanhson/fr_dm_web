@@ -10,14 +10,20 @@ export default function WardPage() {
     const [filtered, setFiltered] = useState(wardData);
 
     const handleSearch = (values: any) => {
-        const result = data.filter((item) => {
-            return (
-                (!values.ward || item.ward === values.ward) &&
-                (!values.code || String(item.code).includes(values.code))
-            );
-        });
+        const { district, code } = values;
 
-        if (result.length === 0) {
+        const hasFilter = district || code;
+
+        const result = hasFilter
+            ? data.filter((item) => {
+                  return (
+                      (!district || item.district === district) &&
+                      (!code || String(item.code).includes(code))
+                  );
+              })
+            : data;
+
+        if (hasFilter && result.length === 0) {
             message.warning("Không có bản ghi nào thỏa mãn điều kiện tìm kiếm");
         }
 

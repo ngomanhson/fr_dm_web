@@ -4,10 +4,10 @@ export type ProvinceType = {
     name: string;
 };
 
-export const provinceData: ProvinceType[] = Array.from({ length: 75 }).map(
-    (_, i) => ({
-        key: i,
-        code: 75 + i,
-        name: ["Ba Đình", "Hoàn Kiếm", "Hai Bà Trưng"][i % 3],
-    })
-);
+export const provinceData: ProvinceType[] = [
+    { key: 1, code: 1001, name: "Hà Nội" },
+    { key: 2, code: 1002, name: "Hồ Chí Minh" },
+    { key: 3, code: 1003, name: "Đà Nẵng" },
+    { key: 4, code: 1004, name: "Hải Phòng" },
+    { key: 5, code: 1005, name: "Cần Thơ" },
+];

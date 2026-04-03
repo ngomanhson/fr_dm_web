@@ -1,30 +1,62 @@
 export type WardType = {
     key: number;
     ward: string;
+    district: string;
     code: number;
 };
+export const districtMap: Record<string, string[]> = {
+    "Ba Đình": [
+        "Phúc Xá",
+        "Trúc Bạch",
+        "Vĩnh Phúc",
+        "Cống Vị",
+        "Liễu Giai",
+        "Ngọc Hà",
+        "Đội Cấn",
+        "Quán Thánh",
+        "Nguyễn Trung Trực",
+    ],
+    "Hoàn Kiếm": [
+        "Phan Chu Trinh",
+        "Hàng Bạc",
+        "Hàng Gai",
+        "Hàng Đào",
+        "Hàng Bông",
+        "Hàng Trống",
+        "Cửa Đông",
+        "Cửa Nam",
+    ],
+    "Đống Đa": [
+        "Cát Linh",
+        "Văn Miếu",
+        "Quốc Tử Giám",
+        "Láng Thượng",
+        "Khâm Thiên",
+        "Nam Đồng",
+    ],
+    "Cầu Giấy": [
+        "Dịch Vọng",
+        "Dịch Vọng Hậu",
+        "Quan Hoa",
+        "Nghĩa Đô",
+        "Nghĩa Tân",
+        "Yên Hòa",
+    ],
+    "Hai Bà Trưng": [
+        "Bạch Đằng",
+        "Thanh Lương",
+        "Thanh Nhàn",
+        "Cầu Dền",
+        "Phố Huế",
+    ],
+};
 
-const wards = [
-    "Phúc Xá",
-    "Trúc Bạch",
-    "Vĩnh Phúc",
-    "Cống Vị",
-    "Liễu Giai",
-    "Ngọc Hà",
-    "Đội Cấn",
-    "Quán Thánh",
-    "Nguyễn Trung Trực",
-    "Phan Chu Trinh",
-    "Hàng Bạc",
-    "Hàng Gai",
-    "Hàng Đào",
-    "Hàng Bông",
-];
-
-export const wardData: WardType[] = Array.from({ length: 18460 }).map(
-    (_, i) => ({
-        key: i,
-        code: 860 + i,
-        ward: `Phường ${wards[i % wards.length]}`,
-    })
+export const wardData: WardType[] = Object.entries(districtMap).flatMap(
+    ([district, wards], districtIndex) =>
+        wards.map((ward, wardIndex) => ({
+            key: Number(`${districtIndex}${wardIndex}`),
+            code: 1000 + districtIndex * 100 + wardIndex,
+            district,
+            ward,
+        }))
 );

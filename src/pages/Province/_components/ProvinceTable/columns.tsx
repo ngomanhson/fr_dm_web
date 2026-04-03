@@ -44,15 +44,27 @@ export const getProvinceColumns = ({
     {
         title: "Tác vụ",
         key: "action",
-        align: "left",
+        width: 140,
+        align: "center",
         onHeaderCell: () => ({
             className: "table__header-cell",
         }),
         render: (_, record) => (
             <Space size="small">
-                <Button type="text" icon={<EditOutlined />} onClick={() => onEdit(record)} />
+                <Button
+                    type="text"
+                    icon={<EditOutlined />}
+                    onClick={() => onEdit(record)}
+                    style={{ color: "#1677ff" }}
+                />
 
-                <Popconfirm title="Bạn có chắc muốn xoá?" onConfirm={() => onDelete(record)}>
+                <Popconfirm
+                    title="Xoá bản ghi này?"
+                    okText="Xoá"
+                    cancelText="Huỷ"
+                    okButtonProps={{ danger: true }}
+                    onConfirm={() => onDelete(record)}
+                >
                     <Button type="text" danger icon={<DeleteOutlined />} />
                 </Popconfirm>
             </Space>

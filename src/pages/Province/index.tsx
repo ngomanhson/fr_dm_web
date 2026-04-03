@@ -10,14 +10,20 @@ export default function ProvincePage() {
     const [filtered, setFiltered] = useState(provinceData);
 
     const handleSearch = (values: any) => {
-        const result = data.filter((item) => {
-            return (
-                (!values.name || item.name.toLowerCase().includes(values.name.toLowerCase())) &&
-                (!values.code || String(item.code).includes(values.code))
-            );
-        });
+        const { province, code } = values;
 
-        if (result.length === 0) {
+        const hasFilter = province || code;
+
+        const result = hasFilter
+            ? data.filter((item) => {
+                  return (
+                      (!province || item.name === province) &&
+                      (!code || String(item.code).includes(code))
+                  );
+              })
+            : data;
+
+        if (hasFilter && result.length === 0) {
             message.warning("Không có bản ghi nào thỏa mãn điều kiện tìm kiếm");
         }
 

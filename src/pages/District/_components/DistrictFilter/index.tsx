@@ -2,6 +2,7 @@ import { Form, Input, Select, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import UploadButton from "@/components/UploadButton";
 import styles from "./styles.module.scss";
+import { districtData } from "@/mocks/district.data";
 
 export default function DistrictFilter({ onSearch, onImport }: any) {
     const [form] = Form.useForm();
@@ -14,7 +15,10 @@ export default function DistrictFilter({ onSearch, onImport }: any) {
                         showSearch
                         optionFilterProp="label"
                         placeholder="Chọn tỉnh"
-                        options={[{ label: "Hà Nội", value: "HN" }]}
+                        options={[...new Set(districtData.map((d) => d.province))].map((p) => ({
+                            label: p,
+                            value: p,
+                        }))}
                     />
                 </Form.Item>
 

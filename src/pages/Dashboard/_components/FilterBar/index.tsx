@@ -1,14 +1,15 @@
 import React from "react";
-import { DatePicker, Button } from "antd";
+import { Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import styles from "./styles.module.scss";
+import InputItem from "@/components/InputItem";
 
 const FilterBar: React.FC = () => {
     const today = dayjs();
 
-    const disabledDate = (current: any) => {
-        return current && current > dayjs().endOf("day");
+    const disabledFutureDate = (today: any) => (current: any) => {
+        return current && current > today.endOf("day");
     };
 
     const handleSearch = () => {
@@ -18,19 +19,18 @@ const FilterBar: React.FC = () => {
     return (
         <div className={styles.filter}>
             <div className={styles.filter__inputs}>
-                <DatePicker
+                <InputItem
+                    name="fromDate"
+                    type="datepicker"
                     defaultValue={today}
-                    format="DD/MM/YYYY"
-                    placeholder="Chọn ngày"
-                    className={styles.filter__picker}
-                    disabledDate={disabledDate}
+                    disabledDate={disabledFutureDate(today)}
                 />
-                <DatePicker
+
+                <InputItem
+                    name="toDate"
+                    type="datepicker"
                     defaultValue={today}
-                    format="DD/MM/YYYY"
-                    placeholder="Chọn ngày"
-                    className={styles.filter__picker}
-                    disabledDate={disabledDate}
+                    disabledDate={disabledFutureDate(today)}
                 />
             </div>
             <Button

@@ -1,15 +1,16 @@
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import { useState } from "react";
 import styles from "./styles.module.scss";
 import type { ColumnsType } from "antd/es/table";
 import PaginationTable from "@/components/PaginationTable";
 import { paginatedData, type PaymentData } from "@/mocks/payment.data";
+import { FileExcelOutlined } from "@ant-design/icons";
 
 export default function PaymentMethodTab() {
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(15);
 
-    const total = paginatedData.length; // Giả sử tổng số bản ghi lấy từ API
+    const total = paginatedData.length;
 
     const columns: ColumnsType<PaymentData> = [
         {
@@ -80,6 +81,10 @@ export default function PaymentMethodTab() {
     ];
     return (
         <div className={styles.wrapper}>
+            <Button icon={<FileExcelOutlined />} type="primary" className={styles["export__btn"]}>
+                Xuất Excel
+            </Button>
+
             <Table
                 columns={columns}
                 dataSource={paginatedData}

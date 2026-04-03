@@ -1,7 +1,7 @@
+import type { DistrictType } from "@/schemas/district.schema";
 import type { ColumnsType } from "antd/es/table";
-import type { District } from "@/mocks/district.data";
 
-export const getDistrictColumns = (page: number, pageSize: number): ColumnsType<District> => [
+export const getDistrictColumns = (page: number, pageSize: number): ColumnsType<DistrictType> => [
     {
         title: "STT",
         render: (_, __, index) => (page - 1) * pageSize + index + 1,

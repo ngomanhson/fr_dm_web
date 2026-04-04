@@ -4,6 +4,7 @@ import styles from "../../styles.module.scss";
 import type { ColumnsType } from "antd/es/table";
 import { objectData, type ObjectData } from "@/mocks/object.data";
 import PaginationTable from "@/components/PaginationTable";
+import { formatDate, formatCurrency } from "@/utils";
 
 export default function ObjectTable() {
     const [page, setPage] = useState(1);
@@ -26,6 +27,7 @@ export default function ObjectTable() {
         {
             title: "Ngày",
             dataIndex: "date",
+            render: (value) => formatDate(value),
             onHeaderCell: () => ({
                 className: "table__header-cell",
             }),
@@ -41,6 +43,7 @@ export default function ObjectTable() {
         {
             title: "Tổng tiền",
             dataIndex: "totalPrice",
+            render: (value) => formatCurrency(value),
             onHeaderCell: () => ({
                 className: "table__header-cell",
             }),

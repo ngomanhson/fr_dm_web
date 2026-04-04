@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Select, Typography } from "antd";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import styles from "../styles.module.scss";
+import { formatCurrency } from "@/utils";
 
 const { Text } = Typography;
 
@@ -49,11 +50,11 @@ const PaymentMethodBar = () => {
                         <XAxis dataKey="name" />
                         <YAxis
                             width={"auto"}
-                            tickFormatter={(v) => v.toLocaleString("vi-VN")}
+                            tickFormatter={(v) => formatCurrency(v)}
                             axisLine={false}
                             tickLine={false}
                         />
-                        <Tooltip formatter={(v: any) => v?.toLocaleString()} />
+                        <Tooltip formatter={(v: any) => formatCurrency(v)} />
                         <Bar dataKey="value" fill="#4299e1" />
                     </BarChart>
                 </ResponsiveContainer>

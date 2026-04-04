@@ -10,14 +10,13 @@ import {
     LabelList,
 } from "recharts";
 import styles from "../styles.module.scss";
+import { formatCurrency } from "@/utils";
 
 const objectData = [
     { date: "13/03/2025", insurance: 15000000, service: 10000000 },
     { date: "14/03/2025", insurance: 20000000, service: 9000000 },
     { date: "15/03/2025", insurance: 14000000, service: 23000000 },
 ];
-
-const formatMoney = (value: number) => value.toLocaleString("vi-VN");
 
 const RevenueObjectChart: React.FC = () => {
     return (
@@ -44,7 +43,7 @@ const RevenueObjectChart: React.FC = () => {
                             }}
                         />
                         <Tooltip
-                            formatter={(value: any) => formatMoney(value)}
+                            formatter={(value: any) => formatCurrency(value)}
                             cursor={{ fill: "rgba(0,0,0,0.05)" }}
                         />
 
@@ -60,7 +59,7 @@ const RevenueObjectChart: React.FC = () => {
                                 dataKey="insurance"
                                 position="inside"
                                 style={{ fill: "#fff", fontSize: 12 }}
-                                formatter={(v: any) => (v > 0 ? formatMoney(v) : "")}
+                                formatter={(v: any) => (v > 0 ? formatCurrency(v) : "")}
                             />
                         </Bar>
 
@@ -69,7 +68,7 @@ const RevenueObjectChart: React.FC = () => {
                                 dataKey="service"
                                 position="inside"
                                 style={{ fill: "#fff", fontSize: 12 }}
-                                formatter={(v: any) => (v > 0 ? formatMoney(v) : "")}
+                                formatter={(v: any) => (v > 0 ? formatCurrency(v) : "")}
                             />
                         </Bar>
                     </BarChart>

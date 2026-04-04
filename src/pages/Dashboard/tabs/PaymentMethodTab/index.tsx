@@ -5,6 +5,7 @@ import type { ColumnsType } from "antd/es/table";
 import PaginationTable from "@/components/PaginationTable";
 import { paginatedData, type PaymentData } from "@/mocks/payment.data";
 import { FileExcelOutlined } from "@ant-design/icons";
+import { formatCurrency } from "@/utils";
 
 export default function PaymentMethodTab() {
     const [page, setPage] = useState(1);
@@ -39,35 +40,35 @@ export default function PaymentMethodTab() {
                     dataIndex: "cash",
                     align: "right",
                     className: styles.headerPink,
-                    render: (val) => val.toLocaleString("vi-VN"),
+                    render: (val) => formatCurrency(val),
                 },
                 {
                     title: "QRMB Động",
                     dataIndex: "qrmbDynamic",
                     align: "right",
                     className: styles.headerPink,
-                    render: (val) => val.toLocaleString("vi-VN"),
+                    render: (val) => formatCurrency(val),
                 },
                 {
                     title: "QRMB Tĩnh",
                     dataIndex: "qrmbStatic",
                     align: "right",
                     className: styles.headerPink,
-                    render: (val) => val.toLocaleString("vi-VN"),
+                    render: (val) => formatCurrency(val),
                 },
                 {
                     title: "POS MB",
                     dataIndex: "posMb",
                     align: "right",
                     className: styles.headerPink,
-                    render: (val) => val.toLocaleString("vi-VN"),
+                    render: (val) => formatCurrency(val),
                 },
                 {
                     title: "Chuyển khoản khác",
                     dataIndex: "transfer",
                     align: "right",
                     className: styles.headerPink,
-                    render: (val) => val.toLocaleString("vi-VN"),
+                    render: (val) => formatCurrency(val),
                 },
             ],
         },
@@ -76,7 +77,7 @@ export default function PaymentMethodTab() {
             dataIndex: "totalPrice",
             align: "right",
             className: styles.headerBlue,
-            render: (val) => <strong>{val.toLocaleString("vi-VN")}</strong>,
+            render: (val) => <strong>{formatCurrency(val)}</strong>,
         },
     ];
     return (
@@ -117,34 +118,22 @@ export default function PaymentMethodTab() {
                                 <strong>Tổng</strong>
                             </Table.Summary.Cell>
                             <Table.Summary.Cell index={2} align="right">
-                                <strong>
-                                    {new Intl.NumberFormat("vi-VN").format(totals.cash)}
-                                </strong>
+                                <strong>{formatCurrency(totals.cash)}</strong>
                             </Table.Summary.Cell>
                             <Table.Summary.Cell index={3} align="right">
-                                <strong>
-                                    {new Intl.NumberFormat("vi-VN").format(totals.qrmbDynamic)}
-                                </strong>
+                                <strong>{formatCurrency(totals.qrmbDynamic)}</strong>
                             </Table.Summary.Cell>
                             <Table.Summary.Cell index={4} align="right">
-                                <strong>
-                                    {new Intl.NumberFormat("vi-VN").format(totals.qrmbStatic)}
-                                </strong>
+                                <strong>{formatCurrency(totals.qrmbStatic)}</strong>
                             </Table.Summary.Cell>
                             <Table.Summary.Cell index={5} align="right">
-                                <strong>
-                                    {new Intl.NumberFormat("vi-VN").format(totals.posMb)}
-                                </strong>
+                                <strong>{formatCurrency(totals.posMb)}</strong>
                             </Table.Summary.Cell>
                             <Table.Summary.Cell index={6} align="right">
-                                <strong>
-                                    {new Intl.NumberFormat("vi-VN").format(totals.transfer)}
-                                </strong>
+                                <strong>{formatCurrency(totals.transfer)}</strong>
                             </Table.Summary.Cell>
                             <Table.Summary.Cell index={7} align="right">
-                                <strong>
-                                    {new Intl.NumberFormat("vi-VN").format(totals.totalPrice)}
-                                </strong>
+                                <strong>{formatCurrency(totals.totalPrice)}</strong>
                             </Table.Summary.Cell>
                         </Table.Summary.Row>
                     );

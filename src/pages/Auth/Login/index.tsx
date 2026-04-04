@@ -1,136 +1,79 @@
-import { useState } from "react";
-import { Button, Input, Typography, Divider, Card } from "antd";
-import { MailOutlined, LockOutlined, GoogleOutlined } from "@ant-design/icons";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginBody, type LoginBodyType } from "@/schemas/auth.schema";
+import React from "react";
+import { Button, Typography, Divider, Card } from "antd";
+import { GoogleOutlined } from "@ant-design/icons";
+import Form from "@rjsf/antd";
+import validator from "@rjsf/validator-ajv8";
+
 import styles from "./styles.module.scss";
 import LoginDecor from "@/assets/images/login-decor.png";
+import { loginSchema, loginUiSchema } from "@/schemas/auth.schema";
+import { loginWidgets } from "./_components/LoginWidgets";
+import { transformErrors } from "./transformErrors";
 import { useNavigate } from "react-router-dom";
-import routes from "@/configs/routes";
+import config from "@/configs";
+
 const { Text, Title } = Typography;
 
-export default function LoginForm() {
+const LoginPage: React.FC = () => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
-
-    const form = useForm<LoginBodyType>({
-        resolver: zodResolver(LoginBody),
-        defaultValues: {
-            email: "",
-            password: "",
-        },
-        mode: "onBlur",
-        reValidateMode: "onChange",
-    });
-
-    const onSubmit = async (data: LoginBodyType) => {
-        setLoading(true);
-        try {
-            console.log(data);
-            navigate(routes.dashboard);
-        } catch (err) {
-            form.setError("root", {
-                message: "Login failed",
-            });
-            console.log(err);
-        } finally {
-            setLoading(false);
-        }
+    const onSubmit = ({ formData }: any) => {
+        console.log("Data:", formData);
+        navigate(config.routes.dashboard);
     };
 
     return (
-        <div className={styles.container}>
-            <Card className={styles.card} bodyStyle={{ padding: 0 }}>
-                <div className={styles.wrapper}>
-                    {/* LEFT - IMAGE */}
-                    <div className={styles.image}>
+        <div className={styles["login-page"]}>
+            <Card className={styles["login-page__card"]}>
+                <div className={styles["login-page__wrapper"]}>
+                    <div className={styles["login-page__side-image"]}>
                         <img src={LoginDecor} alt="login" />
                     </div>
 
-                    {/* RIGHT - FORM */}
-                    <div className={styles.formContainer}>
-                        <form
-                            onSubmit={form.handleSubmit(onSubmit)}
-                            className={styles.form}
-                            noValidate
+                    <div className={styles["login-page__form-container"]}>
+                        <div className={styles["login-page__header"]}>
+                            <Title level={3}>Chào mừng quay lại</Title>
+                            <Text type="secondary">Đăng nhập để tiếp tục hệ thống</Text>
+                        </div>
+
+                        <Form
+                            liveValidate={true}
+                            focusOnFirstError={true}
+                            schema={loginSchema}
+                            uiSchema={loginUiSchema}
+                            validator={validator}
+                            widgets={loginWidgets}
+                            transformErrors={transformErrors}
+                            onSubmit={onSubmit}
+                            noHtml5Validate
+                            showErrorList={false}
                         >
-                            <div className={styles.header}>
-                                <Title level={3}>Chào mừng quay lại</Title>
-                                <Text type="secondary">Đăng nhập để tiếp tục sử dụng hệ thống</Text>
+                            <div className={styles["login-page__form-actions"]}>
+                                <Button
+                                    type="primary"
+                                    htmlType="submit"
+                                    block
+                                    className={styles["login-page__btn-submit"]}
+                                >
+                                    Đăng nhập
+                                </Button>
+                                <Divider plain>
+                                    <Text className={styles["login-page__divider-text"]}>Hoặc</Text>
+                                </Divider>
+                                <Button
+                                    icon={<GoogleOutlined />}
+                                    size="large"
+                                    block
+                                    className={styles["login-page__btn-google"]}
+                                >
+                                    Đăng nhập với Google
+                                </Button>
                             </div>
-                            {/* Email */}
-                            <div className={styles.field}>
-                                <Text className={styles.label}>Email</Text>
-
-                                <Controller
-                                    name="email"
-                                    control={form.control}
-                                    render={({ field }) => (
-                                        <Input
-                                            {...field}
-                                            size="large"
-                                            placeholder="Enter your email"
-                                            prefix={<MailOutlined />}
-                                            status={form.formState.errors.email ? "error" : ""}
-                                        />
-                                    )}
-                                />
-
-                                <Text type="danger" className={styles.error}>
-                                    {form.formState.errors.email?.message}
-                                </Text>
-                            </div>
-
-                            {/* Password */}
-                            <div className={styles.field}>
-                                <Text className={styles.label}>Mật khẩu</Text>
-
-                                <Controller
-                                    name="password"
-                                    control={form.control}
-                                    render={({ field }) => (
-                                        <Input.Password
-                                            {...field}
-                                            size="large"
-                                            placeholder="********"
-                                            prefix={<LockOutlined />}
-                                            status={form.formState.errors.password ? "error" : ""}
-                                        />
-                                    )}
-                                />
-
-                                <Text type="danger" className={styles.error}>
-                                    {form.formState.errors.password?.message}
-                                </Text>
-                            </div>
-
-                            {/* Root error */}
-                            {form.formState.errors.root && (
-                                <Text type="danger" className={styles.error}>
-                                    {form.formState.errors.root.message}
-                                </Text>
-                            )}
-
-                            <Button
-                                type="primary"
-                                htmlType="submit"
-                                size="large"
-                                loading={loading}
-                                block
-                            >
-                                Đăng nhập
-                            </Button>
-
-                            <Divider>Hoặc tiếp tục với</Divider>
-
-                            <Button icon={<GoogleOutlined />} size="large" block>
-                                Đăng nhập với Google
-                            </Button>
-                        </form>
+                        </Form>
                     </div>
                 </div>
             </Card>
         </div>
     );
-}
+};
+
+export default LoginPage;

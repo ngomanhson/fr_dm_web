@@ -2,7 +2,7 @@ import { Form, Input, Select, Checkbox, Radio, DatePicker } from "antd";
 import type { ReactNode } from "react";
 import styles from "./styles.module.scss";
 
-type InputType = "input" | "select" | "number" | "checkbox" | "radio" | "datepicker";
+type InputType = "text" | "select" | "number" | "checkbox" | "radio" | "datepicker" | "password";
 
 interface Option {
     label: string;
@@ -29,7 +29,7 @@ interface Props {
 export default function InputItem({
     name,
     label,
-    type = "input",
+    type = "text",
     placeholder,
     options = [],
     prefixIcon,
@@ -49,7 +49,7 @@ export default function InputItem({
 
     const renderField = () => {
         switch (type) {
-            case "input":
+            case "text":
                 return (
                     <Input
                         placeholder={placeholder || (label ? `Nhập ${label}` : "")}
@@ -108,6 +108,16 @@ export default function InputItem({
                     />
                 );
 
+            case "password":
+                return (
+                    <Input.Password
+                        placeholder={placeholder || (label ? `Nhập ${label}` : "")}
+                        prefix={prefixIcon}
+                        disabled={disabled}
+                        {...rest}
+                    />
+                );
+
             default:
                 return <Input disabled={disabled} {...rest} />;
         }
@@ -120,7 +130,6 @@ export default function InputItem({
     return (
         <Form.Item
             name={name}
-            label={label}
             rules={finalRules}
             valuePropName={valuePropName}
             className={styles["no-margin"]}

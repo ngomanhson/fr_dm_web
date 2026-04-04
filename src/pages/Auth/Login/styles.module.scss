@@ -1,71 +1,63 @@
-.container {
+.login-page {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #f5f7fb;
-}
 
-.card {
-    width: 900px;
-    border-radius: 16px;
-    overflow: hidden;
-}
-
-.wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 500px;
-}
-
-/* LEFT IMAGE */
-.image {
-    display: none;
-
-    img {
+    &__card {
+        max-width: 800px;
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        border-radius: 20px;
+        overflow: hidden;
+        :global(.ant-card-body) {
+            padding: 0 !important;
+        }
     }
-}
 
-/* RIGHT FORM */
-.formContainer {
-    padding: 32px;
-    display: flex;
-    align-items: center;
-}
+    &__wrapper {
+        display: flex;
+        max-height: 500px;
+    }
 
-.form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
+    &__side-image {
+        flex: 1.1;
+        padding: 12px;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+    }
 
-.header {
-    text-align: center;
-}
+    &__form-container {
+        flex: 1;
+        padding: 30px;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
+    &__header {
+        text-align: center;
+    }
 
-.label {
-    font-size: 14px;
-    font-weight: 500;
-}
+    &__field {
+    }
 
-.error {
-    font-size: 12px;
-    min-height: 16px;
-}
-
-/* RESPONSIVE */
-@media (min-width: 768px) {
-    .image {
+    &__error-msg {
+        color: #ff4d4f;
+        font-size: 12px;
         display: block;
+    }
+
+    &__btn-submit {
+        font-weight: 600;
+    }
+
+    &__btn-google {
+        border-color: #d9d9d9 !important;
     }
 }

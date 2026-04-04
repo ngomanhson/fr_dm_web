@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { App } from "antd";
 import { provinceData } from "@/mocks/province.data";
 import ProvinceTable from "./_components/ProvinceTable";
@@ -30,6 +30,13 @@ export default function ProvincePage() {
         setFiltered(result);
     };
 
+    const provinceOptions = useMemo(() => {
+        return [...new Set(data?.map((d) => d.name))].map((p) => ({
+            label: p,
+            value: p,
+        }));
+    }, [data]);
+
     const handleImport = (newData: any[]) => {
         const merged = [...data, ...newData];
         setData(merged);
@@ -38,7 +45,11 @@ export default function ProvincePage() {
 
     return (
         <>
-            <ProvinceFilter onSearch={handleSearch} onImport={handleImport} />
+            <ProvinceFilter
+                onSearch={handleSearch}
+                onImport={handleImport}
+                provinceOptions={provinceOptions}
+            />
             <ProvinceTable data={filtered} />
         </>
     );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import DistrictFilter from "@/pages/District/_components/DistrictFilter";
 import DistrictTable from "@/pages/District/_components/DistrictTable";
 import { districtData } from "@/mocks/district.data";
@@ -25,6 +25,13 @@ export default function DistrictPage() {
         setFiltered(result);
     };
 
+    const provinceOptions = useMemo(() => {
+        return [...new Set(data?.map((d) => d.province))].map((p) => ({
+            label: p,
+            value: p,
+        }));
+    }, [data]);
+
     const handleImport = (newData: any[]) => {
         const merged = [...data, ...newData];
         setData(merged);
@@ -33,7 +40,11 @@ export default function DistrictPage() {
 
     return (
         <>
-            <DistrictFilter onSearch={handleSearch} onImport={handleImport} />
+            <DistrictFilter
+                onSearch={handleSearch}
+                onImport={handleImport}
+                provinceOptions={provinceOptions}
+            />
             <DistrictTable data={filtered} />
         </>
     );

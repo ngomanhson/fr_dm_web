@@ -1,5 +1,5 @@
 export type WardType = {
-    key: number;
+    id: number;
     ward: string;
     district: string;
     code: number;
@@ -54,7 +54,7 @@ export const districtMap: Record<string, string[]> = {
 export const wardData: WardType[] = Object.entries(districtMap).flatMap(
     ([district, wards], districtIndex) =>
         wards.map((ward, wardIndex) => ({
-            key: Number(`${districtIndex}${wardIndex}`),
+            id: Number(`${districtIndex}${wardIndex}`),
             code: 1000 + districtIndex * 100 + wardIndex,
             district,
             ward,

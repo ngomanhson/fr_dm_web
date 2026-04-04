@@ -18,7 +18,11 @@ interface Props {
     prefixIcon?: ReactNode;
     suffixIcon?: ReactNode;
     required?: boolean;
+    rules?: any[];
     disabled?: boolean;
+    showSearch?: boolean;
+    optionFilterProp?: string;
+    allowClear?: boolean;
     [key: string]: any;
 }
 
@@ -30,18 +34,25 @@ export default function InputItem({
     options = [],
     prefixIcon,
     suffixIcon,
-    required = true,
+    required = false,
+    rules,
     disabled = false,
+    showSearch,
+    optionFilterProp,
+    allowClear = true,
     ...rest
 }: Props) {
-    const rules = required ? [{ required: true, message: `${label} không được để trống` }] : [];
+    const finalRules =
+        rules ?? (required ? [{ required: true, message: `${label} không được để trống` }] : []);
+
+    const valuePropName = type === "checkbox" ? "value" : undefined;
 
     const renderField = () => {
         switch (type) {
             case "input":
                 return (
                     <Input
-                        placeholder={placeholder || `Nhập ${label}`}
+                        placeholder={placeholder || (label ? `Nhập ${label}` : "")}
                         prefix={prefixIcon}
                         suffix={suffixIcon}
                         disabled={disabled}
@@ -53,7 +64,7 @@ export default function InputItem({
                 return (
                     <Input
                         type="number"
-                        placeholder={placeholder || `Nhập ${label}`}
+                        placeholder={placeholder || (label ? `Nhập ${label}` : "")}
                         disabled={disabled}
                         {...rest}
                     />
@@ -62,9 +73,11 @@ export default function InputItem({
             case "select":
                 return (
                     <Select
-                        placeholder={placeholder || `Chọn ${label}`}
+                        placeholder={placeholder || (label ? `Chọn ${label}` : "")}
                         options={options}
-                        allowClear
+                        allowClear={allowClear}
+                        showSearch={showSearch}
+                        optionFilterProp={optionFilterProp}
                         disabled={disabled}
                         {...rest}
                     />
@@ -87,9 +100,10 @@ export default function InputItem({
             case "datepicker":
                 return (
                     <DatePicker
-                        placeholder={placeholder}
+                        placeholder={placeholder || (label ? `Chọn ${label}` : "")}
                         disabled={disabled}
                         format="DD/MM/YYYY"
+                        style={{ width: "100%" }}
                         {...rest}
                     />
                 );
@@ -107,8 +121,8 @@ export default function InputItem({
         <Form.Item
             name={name}
             label={label}
-            rules={rules}
-            valuePropName={type === "checkbox" ? "value" : "value"}
+            rules={finalRules}
+            valuePropName={valuePropName}
             className={styles["no-margin"]}
         >
             {renderField()}

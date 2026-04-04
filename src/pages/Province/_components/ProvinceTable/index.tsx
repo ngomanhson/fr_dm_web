@@ -64,7 +64,7 @@ export default function ProvinceTable({ data }: { data: typeof provinceData }) {
                 dataSource={paginatedData}
                 pagination={false}
                 bordered
-                rowKey="key"
+                rowKey="id"
                 locale={{
                     emptyText: "Không có bản ghi nào thỏa mãn điều kiện tìm kiếm",
                 }}

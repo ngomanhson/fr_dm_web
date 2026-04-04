@@ -1,13 +1,13 @@
 export type ProvinceType = {
-    key: number;
+    id: number;
     code: number;
     name: string;
 };
 
 export const provinceData: ProvinceType[] = [
-    { key: 1, code: 1001, name: "Hà Nội" },
-    { key: 2, code: 1002, name: "Hồ Chí Minh" },
-    { key: 3, code: 1003, name: "Đà Nẵng" },
-    { key: 4, code: 1004, name: "Hải Phòng" },
-    { key: 5, code: 1005, name: "Cần Thơ" },
+    { id: 1, code: 1001, name: "Hà Nội" },
+    { id: 2, code: 1002, name: "Hồ Chí Minh" },
+    { id: 3, code: 1003, name: "Đà Nẵng" },
+    { id: 4, code: 1004, name: "Hải Phòng" },
+    { id: 5, code: 1005, name: "Cần Thơ" },
 ];

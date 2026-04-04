@@ -1,7 +1,7 @@
 import { wardData } from "@/mocks/ward.data";
 import WardFilter from "./_components/WardFilter";
 import WardTable from "./_components/WardTable";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { App } from "antd";
 
 export default function WardPage() {
@@ -30,6 +30,13 @@ export default function WardPage() {
         setFiltered(result);
     };
 
+    const districtOptions = useMemo(() => {
+        return [...new Set(data?.map((d) => d.district))].map((p) => ({
+            label: p,
+            value: p,
+        }));
+    }, [data]);
+
     const handleImport = (newData: any[]) => {
         const merged = [...data, ...newData];
         setData(merged);
@@ -37,7 +44,11 @@ export default function WardPage() {
     };
     return (
         <>
-            <WardFilter onSearch={handleSearch} onImport={handleImport} />
+            <WardFilter
+                onSearch={handleSearch}
+                onImport={handleImport}
+                districtOptions={districtOptions}
+            />
             <WardTable data={filtered} />
         </>
     );

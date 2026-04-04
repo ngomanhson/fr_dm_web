@@ -64,7 +64,7 @@ export default function WardTable({ data }: { data: typeof wardData }) {
                 dataSource={paginatedData}
                 pagination={false}
                 bordered
-                rowKey="key"
+                rowKey="id"
                 locale={{
                     emptyText: "Không có bản ghi nào thỏa mãn điều kiện tìm kiếm",
                 }}

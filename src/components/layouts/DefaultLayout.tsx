@@ -5,6 +5,7 @@ import Sidebar from "../Sidebar";
 import { useLocation } from "react-router-dom";
 import { useMemo } from "react";
 import { menuItems } from "@/mocks/sidebar.data";
+import { getActiveMenuItem } from "@/helpers/menu";
 
 const { Content } = Layout;
 
@@ -21,10 +22,11 @@ export default function DefaultLayout({ children }: { children: React.ReactNode 
 
     const location = useLocation();
 
-    const currentTitle = useMemo(() => {
-        const found = menuItems.find((item) => location.pathname.startsWith(item.key));
-        return found?.label || "Trang chủ";
+    const currentMenu = useMemo(() => {
+        return getActiveMenuItem(menuItems, location.pathname);
     }, [location.pathname]);
+
+    const currentTitle = currentMenu?.label || "Trang chủ";
 
     return (
         <Layout style={{ minHeight: "100vh" }}>

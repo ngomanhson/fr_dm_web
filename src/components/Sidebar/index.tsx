@@ -5,6 +5,7 @@ import styles from "./styles.module.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import InputItem from "@/components/InputItem";
 import { menuItems } from "@/mocks/sidebar.data";
+import { getActiveMenuItem } from "@/helpers/menu";
 
 const { Sider } = Layout;
 const { useBreakpoint } = Grid;
@@ -24,22 +25,32 @@ export default function Sidebar({ openMobile, setOpenMobile }: SidebarProps) {
 
     const isMobile = !screens.md;
 
-    const selectedKeys = useMemo(() => {
-        const found = menuItems.find((item) => location.pathname.startsWith(item.key));
-        return [found?.key || location.pathname];
+    const activeMenu = useMemo(() => {
+        return getActiveMenuItem(menuItems, location.pathname);
     }, [location.pathname]);
+
+    const selectedKeys = activeMenu ? [activeMenu.key] : [];
 
     const handleMenuClick = (e: any) => {
         navigate(e.key);
         if (isMobile) setOpenMobile(false);
     };
 
-    const filteredMenu = useMemo(() => {
+    const mergedMenu = useMemo(() => {
         if (!keyword) return menuItems;
 
         const lower = keyword.toLowerCase();
-        return menuItems.filter((item) => item.label.toLowerCase().includes(lower));
-    }, [keyword]);
+
+        const filtered = menuItems.filter((item) => item.label.toLowerCase().includes(lower));
+
+        const isActiveIncluded = filtered.some((item) => item.key === activeMenu?.key);
+
+        if (!isActiveIncluded && activeMenu) {
+            return [activeMenu, ...filtered];
+        }
+
+        return filtered;
+    }, [keyword, activeMenu]);
 
     // TODO: Tách menuItems ra component riêng
     const content = (
@@ -56,7 +67,7 @@ export default function Sidebar({ openMobile, setOpenMobile }: SidebarProps) {
 
             <Menu
                 mode="inline"
-                items={filteredMenu}
+                items={mergedMenu}
                 className={styles.menu}
                 selectedKeys={selectedKeys}
                 onClick={handleMenuClick}

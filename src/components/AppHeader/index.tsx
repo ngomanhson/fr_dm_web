@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Button, Layout } from "antd";
 import { ExpandAltOutlined, CompressOutlined, MenuOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -14,7 +14,7 @@ interface AppHeaderProps {
 }
 
 const AppHeader: React.FC<AppHeaderProps> = ({ onMenuClick, title }) => {
-    const isHome = useMemo(() => title === "Trang chủ", [title]);
+    const isHome = title === "Trang chủ";
 
     const [isFullscreen, setIsFullscreen] = useState(false);
 

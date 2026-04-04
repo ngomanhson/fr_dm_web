@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "antd";
+import { Button, Form } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import styles from "./styles.module.scss";
@@ -17,19 +17,23 @@ const FilterBar: React.FC = () => {
     };
 
     return (
-        <div className={styles.filter}>
+        <Form
+            className={styles.filter}
+            initialValues={{
+                fromDate: today,
+                toDate: today,
+            }}
+        >
             <div className={styles.filter__inputs}>
                 <InputItem
                     name="fromDate"
                     type="datepicker"
-                    defaultValue={today}
                     disabledDate={disabledFutureDate(today)}
                 />
 
                 <InputItem
                     name="toDate"
                     type="datepicker"
-                    defaultValue={today}
                     disabledDate={disabledFutureDate(today)}
                 />
             </div>
@@ -41,7 +45,7 @@ const FilterBar: React.FC = () => {
             >
                 Tìm kiếm
             </Button>
-        </div>
+        </Form>
     );
 };
 

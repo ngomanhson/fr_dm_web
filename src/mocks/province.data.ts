@@ -1,8 +1,5 @@
-export type ProvinceType = {
-    id: number;
-    code: number;
-    name: string;
-};
+import type { ProvinceType } from "@/types/province.type";
+
 
 export const provinceData: ProvinceType[] = [
     { id: 1, code: 1001, name: "Hà Nội" },

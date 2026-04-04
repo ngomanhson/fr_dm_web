@@ -1,4 +1,4 @@
-import type { DistrictType } from "@/schemas/district.schema";
+import type { DistrictType } from "@/types/district.type";
 
 export const districtData: DistrictType[] = [
     { id: 1, code: 860, name: "Ba Đình", province: "Hà Nội" },

@@ -1,11 +1,12 @@
 import { App, Table } from "antd";
 import { useMemo, useState, useCallback } from "react";
 import styles from "./styles.module.scss";
-import { wardData, type WardType } from "@/mocks/ward.data";
+import { wardData } from "@/mocks/ward.data";
 import PaginationTable from "@/components/PaginationTable";
 import { getWardColumns } from "./columns";
 import FormModal from "@/components/FormModal";
 import InputItem from "@/components/InputItem";
+import type { WardType } from "@/types/ward.type";
 
 export default function WardTable({ data }: { data: typeof wardData }) {
     const { message } = App.useApp();

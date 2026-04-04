@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Select, Typography } from "antd";
+import { Form, Typography } from "antd";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import styles from "../styles.module.scss";
 import { formatCurrency } from "@/utils";
+import InputItem from "@/components/InputItem";
 
 const { Text } = Typography;
 
@@ -18,17 +19,34 @@ const PaymentMethodBar = () => {
     const [method, setMethod] = useState("cash");
     const chartData = paymentDataMap[method];
 
+    const methodOptions = [
+        { label: "Tiền mặt", value: "cash" },
+        { label: "QRMB Động", value: "qrmb_dynamic" },
+        { label: "QRMB Tĩnh", value: "qrmb_static" },
+        { label: "POS", value: "pos" },
+        { label: "Chuyển khoản khác", value: "other" },
+    ];
+
     return (
         <div className={styles.chartCard}>
             <div className={styles.chartCard__header}>
                 <h3 className={styles.chartCard__subtitle}>Doanh thu theo hình thức thanh toán</h3>
-                <Select value={method} onChange={setMethod} style={{ width: 160 }}>
-                    <Select.Option value="cash">Tiền mặt</Select.Option>
-                    <Select.Option value="qrmb_dynamic">QRMB Động</Select.Option>
-                    <Select.Option value="qrmb_static">QRMB Tĩnh</Select.Option>
-                    <Select.Option value="pos">POS</Select.Option>
-                    <Select.Option value="other">Chuyển khoản khác</Select.Option>
-                </Select>
+
+                <Form
+                    initialValues={{
+                        method: "cash",
+                    }}
+                >
+                    <InputItem
+                        name="method"
+                        type="select"
+                        options={methodOptions}
+                        placeholder="Chọn hình thức"
+                        style={{ width: 160 }}
+                        value={method}
+                        onChange={setMethod}
+                    />
+                </Form>
             </div>
 
             <div className={styles.statGroup}>

@@ -3,9 +3,10 @@ import { useMemo, useState, useCallback } from "react";
 import styles from "./styles.module.scss";
 import PaginationTable from "@/components/PaginationTable";
 import { getProvinceColumns } from "./columns";
-import type { provinceData, ProvinceType } from "@/mocks/province.data";
+import type { provinceData } from "@/mocks/province.data";
 import FormModal from "@/components/FormModal";
 import InputItem from "@/components/InputItem";
+import type { ProvinceType } from "@/types/province.type";
 
 export default function ProvinceTable({ data }: { data: typeof provinceData }) {
     const { message } = App.useApp();

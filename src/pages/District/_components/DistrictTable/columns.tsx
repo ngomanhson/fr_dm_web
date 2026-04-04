@@ -1,4 +1,4 @@
-import type { DistrictType } from "@/schemas/district.schema";
+import type { DistrictType } from "@/types/district.type";
 import type { ColumnsType } from "antd/es/table";
 
 export const getDistrictColumns = (page: number, pageSize: number): ColumnsType<DistrictType> => [

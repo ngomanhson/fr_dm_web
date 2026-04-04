@@ -33,23 +33,20 @@ export default function FilterBar({
     return (
         <Form form={form} layout="vertical" onFinish={onSearch} className={styles.filter}>
             <div className={styles.filter__inputs}>
-                {fields.map((field) => {
-                    console.log(field);
-                    return (
-                        <div key={field.name} className={styles.filter__field}>
-                            <InputItem
-                                name={field.name}
-                                label={field.label}
-                                type={field.type}
-                                options={field.options}
-                                placeholder={field.placeholder}
-                                maxLength={field.maxLength}
-                                showSearch={field.showSearch}
-                                optionFilterProp={field.optionFilterProp}
-                            />
-                        </div>
-                    );
-                })}
+                {fields.map((field) => (
+                    <div key={field.name} className={styles.filter__field}>
+                        <InputItem
+                            name={field.name}
+                            label={field.label}
+                            type={field.type}
+                            options={field.options}
+                            placeholder={field.placeholder}
+                            maxLength={field.maxLength}
+                            showSearch={field.showSearch}
+                            optionFilterProp={field.optionFilterProp}
+                        />
+                    </div>
+                ))}
             </div>
 
             <div className={styles.filter__actions}>

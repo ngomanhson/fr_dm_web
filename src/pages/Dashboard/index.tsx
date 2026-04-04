@@ -9,6 +9,7 @@ export default function DashboardPage() {
             <div className={styles.dashboard__container}>
                 <header className={styles.dashboard__header}>
                     <h1 className={styles.dashboard__headerTitle}>DOANH THU THEO NGÀY</h1>
+
                     <FilterBar />
                 </header>
 

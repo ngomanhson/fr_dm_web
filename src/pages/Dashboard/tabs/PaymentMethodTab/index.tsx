@@ -1,144 +1,64 @@
 import { Button, Table } from "antd";
 import { useState } from "react";
 import styles from "./styles.module.scss";
-import type { ColumnsType } from "antd/es/table";
 import PaginationTable from "@/components/PaginationTable";
-import { paginatedData, type PaymentData } from "@/mocks/payment.data";
+import { paginatedData } from "@/mocks/payment.data";
 import { FileExcelOutlined } from "@ant-design/icons";
 import { formatCurrency } from "@/utils";
+import { getPaymentMethodColumns } from "./columns";
+import { calculatePaymentTotals } from "@/helpers/payment";
 
 export default function PaymentMethodTab() {
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(15);
-
     const total = paginatedData.length;
+    const columns = getPaymentMethodColumns(page, pageSize);
 
-    const columns: ColumnsType<PaymentData> = [
-        {
-            title: "STT",
-            key: "stt",
-            width: 70,
-            align: "center",
-            className: styles.headerBlue,
-            render: (_, __, index) => (page - 1) * pageSize + index + 1,
-        },
-        {
-            title: "Ngày",
-            dataIndex: "date",
-            key: "date",
-            width: 120,
-            align: "center",
-            className: styles.headerBlue,
-        },
-        {
-            title: "Hình thức thanh toán",
-            align: "center",
-            className: styles.headerGreen,
-            children: [
-                {
-                    title: "Tiền mặt",
-                    dataIndex: "cash",
-                    align: "right",
-                    className: styles.headerPink,
-                    render: (val) => formatCurrency(val),
-                },
-                {
-                    title: "QRMB Động",
-                    dataIndex: "qrmbDynamic",
-                    align: "right",
-                    className: styles.headerPink,
-                    render: (val) => formatCurrency(val),
-                },
-                {
-                    title: "QRMB Tĩnh",
-                    dataIndex: "qrmbStatic",
-                    align: "right",
-                    className: styles.headerPink,
-                    render: (val) => formatCurrency(val),
-                },
-                {
-                    title: "POS MB",
-                    dataIndex: "posMb",
-                    align: "right",
-                    className: styles.headerPink,
-                    render: (val) => formatCurrency(val),
-                },
-                {
-                    title: "Chuyển khoản khác",
-                    dataIndex: "transfer",
-                    align: "right",
-                    className: styles.headerPink,
-                    render: (val) => formatCurrency(val),
-                },
-            ],
-        },
-        {
-            title: "Tổng tiền",
-            dataIndex: "totalPrice",
-            align: "right",
-            className: styles.headerBlue,
-            render: (val) => <strong>{formatCurrency(val)}</strong>,
-        },
-    ];
     return (
         <div className={styles.wrapper}>
             <Button icon={<FileExcelOutlined />} type="primary" className={styles["export__btn"]}>
                 Xuất Excel
             </Button>
 
-            <Table
-                columns={columns}
-                dataSource={paginatedData}
-                pagination={false}
-                bordered
-                rowKey="key"
-                summary={(pageData) => {
-                    const totals = pageData.reduce(
-                        (acc, record) => ({
-                            cash: acc.cash + record.cash,
-                            qrmbDynamic: acc.qrmbDynamic + record.qrmbDynamic,
-                            qrmbStatic: acc.qrmbStatic + record.qrmbStatic,
-                            posMb: acc.posMb + record.posMb,
-                            transfer: acc.transfer + record.transfer,
-                            totalPrice: acc.totalPrice + record.totalPrice,
-                        }),
-                        {
-                            cash: 0,
-                            qrmbDynamic: 0,
-                            qrmbStatic: 0,
-                            posMb: 0,
-                            transfer: 0,
-                            totalPrice: 0,
-                        },
-                    );
+            <div className={styles.wrapper__table}>
+                <Table
+                    columns={columns}
+                    dataSource={paginatedData}
+                    pagination={false}
+                    bordered
+                    rowKey="id"
+                    scroll={{ x: "max-content" }}
+                    summary={(pageData) => {
+                        const totals = calculatePaymentTotals([...pageData]);
 
-                    return (
-                        <Table.Summary.Row className={styles.summaryRow}>
-                            <Table.Summary.Cell index={0} colSpan={2} align="center">
-                                <strong>Tổng</strong>
-                            </Table.Summary.Cell>
-                            <Table.Summary.Cell index={2} align="right">
-                                <strong>{formatCurrency(totals.cash)}</strong>
-                            </Table.Summary.Cell>
-                            <Table.Summary.Cell index={3} align="right">
-                                <strong>{formatCurrency(totals.qrmbDynamic)}</strong>
-                            </Table.Summary.Cell>
-                            <Table.Summary.Cell index={4} align="right">
-                                <strong>{formatCurrency(totals.qrmbStatic)}</strong>
-                            </Table.Summary.Cell>
-                            <Table.Summary.Cell index={5} align="right">
-                                <strong>{formatCurrency(totals.posMb)}</strong>
-                            </Table.Summary.Cell>
-                            <Table.Summary.Cell index={6} align="right">
-                                <strong>{formatCurrency(totals.transfer)}</strong>
-                            </Table.Summary.Cell>
-                            <Table.Summary.Cell index={7} align="right">
-                                <strong>{formatCurrency(totals.totalPrice)}</strong>
-                            </Table.Summary.Cell>
-                        </Table.Summary.Row>
-                    );
-                }}
-            />
+                        return (
+                            <Table.Summary.Row className={styles.summaryRow}>
+                                <Table.Summary.Cell index={0} colSpan={2} align="center">
+                                    Tổng
+                                </Table.Summary.Cell>
+                                <Table.Summary.Cell index={2} align="right">
+                                    {formatCurrency(totals.cash)}
+                                </Table.Summary.Cell>
+                                <Table.Summary.Cell index={3} align="right">
+                                    {formatCurrency(totals.qrmbDynamic)}
+                                </Table.Summary.Cell>
+                                <Table.Summary.Cell index={4} align="right">
+                                    {formatCurrency(totals.qrmbStatic)}
+                                </Table.Summary.Cell>
+                                <Table.Summary.Cell index={5} align="right">
+                                    {formatCurrency(totals.posMb)}
+                                </Table.Summary.Cell>
+                                <Table.Summary.Cell index={6} align="right">
+                                    {formatCurrency(totals.transfer)}
+                                </Table.Summary.Cell>
+                                <Table.Summary.Cell index={7} align="right">
+                                    {formatCurrency(totals.totalPrice)}
+                                </Table.Summary.Cell>
+                            </Table.Summary.Row>
+                        );
+                    }}
+                />
+            </div>
 
             <PaginationTable
                 page={page}

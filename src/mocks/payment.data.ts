@@ -1,17 +1,8 @@
-export interface PaymentData {
-    key: string;
-    date: string;
-    cash: number;
-    qrmbDynamic: number;
-    qrmbStatic: number;
-    posMb: number;
-    transfer: number;
-    totalPrice: number;
-}
+import type { RevenuePaymentMethodType } from "@/types/payment.type";
 
-export const paginatedData: PaymentData[] = [
+export const paginatedData: RevenuePaymentMethodType[] = [
     {
-        key: "1",
+        id: 1,
         date: "04/08/2025",
         cash: 0,
         qrmbDynamic: 683990494.04,
@@ -20,4 +11,5 @@ export const paginatedData: PaymentData[] = [
         transfer: 219521392,
         totalPrice: 920264486.04,
     },
+
 ];

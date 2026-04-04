@@ -1,9 +1,5 @@
-export type WardType = {
-    id: number;
-    ward: string;
-    district: string;
-    code: number;
-};
+import type { WardType } from "@/types/ward.type";
+
 export const districtMap: Record<string, string[]> = {
     "Ba Đình": [
         "Phúc Xá",

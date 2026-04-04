@@ -1,9 +1,4 @@
-export type ObjectData = {
-    key: number;
-    date: string;
-    objectType: string;
-    totalPrice: number;
-};
+import type { ObjectData } from "@/types/object.type";
 
 export const objectData: ObjectData[] = Array.from({ length: 10 }).map(
     (_, i) => ({

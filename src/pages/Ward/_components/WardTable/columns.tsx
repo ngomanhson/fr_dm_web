@@ -1,7 +1,7 @@
 import { Button, Popconfirm, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
-import type { WardType } from "@/mocks/ward.data";
+import type { WardType } from "@/types/ward.type";
 
 interface Props {
     page: number;

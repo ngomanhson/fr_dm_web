@@ -4,6 +4,7 @@ import { ClinicServicesData } from "@/mocks/clinic-service.data";
 import ServiceFilter from "./_components/ServiceFilter";
 import ServiceTable from "./_components/ServiceTable";
 import type { ClinicService, ClinicServiceFilter } from "@/pages/ClinicService/_types/clinic.type";
+import ServiceFormModal from "./_components/ServiceFormModal";
 
 const FILTER_MAP: Record<keyof Omit<ClinicServiceFilter, "page" | "size">, keyof ClinicService> = {
     facility: "facility",
@@ -14,6 +15,24 @@ const FILTER_MAP: Record<keyof Omit<ClinicServiceFilter, "page" | "size">, keyof
 
 const ClinicServicePage: React.FC = () => {
     const [filters, setFilters] = useState<ClinicServiceFilter>({});
+    const [modalState, setModalState] = useState<{
+        open: boolean;
+        mode: "create" | "edit";
+        data?: ClinicService;
+    }>({ open: false, mode: "create" });
+
+    const handleCreate = useCallback(() => {
+        setModalState({ open: true, mode: "create" });
+    }, []);
+
+    const handleEdit = useCallback((record: ClinicService) => {
+        setModalState({ open: true, mode: "edit", data: record });
+    }, []);
+
+    const handleSubmit = useCallback((values: ClinicService) => {
+        console.log("submit", values);
+        setModalState({ open: false, mode: "create" });
+    }, []);
 
     const handleSearch = useCallback((values: ClinicServiceFilter) => {
         setFilters(values);
@@ -37,11 +56,18 @@ const ClinicServicePage: React.FC = () => {
     return (
         <div className={styles["clinic-container"]}>
             <div className={styles["search-section"]}>
-                <ServiceFilter onSearch={handleSearch} onCreate={() => console.log("create")} />
+                <ServiceFilter onSearch={handleSearch} onCreate={handleCreate} />
             </div>
             <div className={styles["table-section"]}>
-                <ServiceTable data={filteredData} />
+                <ServiceTable data={filteredData} onEdit={handleEdit} />
             </div>
+            <ServiceFormModal
+                open={modalState.open}
+                mode={modalState.mode}
+                initialData={modalState.data}
+                onClose={() => setModalState((s) => ({ ...s, open: false }))}
+                onSubmit={handleSubmit}
+            />
         </div>
     );
 };

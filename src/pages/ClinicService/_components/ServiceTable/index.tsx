@@ -4,13 +4,15 @@ import { useCallback, useMemo, useState } from "react";
 import { getClinicServiceColumns } from "./columns";
 import PaginationTable from "@/components/PaginationTable";
 
-const ServiceTable = ({ data }: { data: ClinicService[] }) => {
+interface Props {
+    data: ClinicService[];
+    onEdit: (record: ClinicService) => void;
+}
+
+const ServiceTable = ({ data, onEdit }: Props) => {
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(15);
     const total = data.length;
-    const handleEdit = useCallback((record: ClinicService) => {
-        console.log(record);
-    }, []);
 
     const handleDelete = useCallback((record: ClinicService) => {
         console.log("delete", record);
@@ -20,10 +22,10 @@ const ServiceTable = ({ data }: { data: ClinicService[] }) => {
         return getClinicServiceColumns({
             page,
             pageSize,
-            onEdit: handleEdit,
+            onEdit: onEdit,
             onDelete: handleDelete,
         });
-    }, [page, pageSize, handleEdit, handleDelete]);
+    }, [page, pageSize, onEdit, handleDelete]);
 
     const paginatedData = useMemo(() => {
         return data.slice((page - 1) * pageSize, page * pageSize);

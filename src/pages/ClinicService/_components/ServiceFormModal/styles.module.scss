@@ -1,0 +1,118 @@
+.modal-action-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+:global {
+    .rjsf-clinic-grid-container > form > fieldset,
+    .rjsf-clinic-grid-container > fieldset {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        column-gap: 20px !important;
+        row-gap: 4px !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+
+        > legend {
+            display: none !important;
+        }
+
+        > div {
+            grid-column: span 1;
+            min-width: 0;
+
+            .ant-form-item {
+                margin-bottom: 12px !important;
+            }
+
+            label {
+                font-size: 13px !important;
+                font-weight: 500;
+            }
+
+            .ant-input,
+            .ant-select,
+            .ant-input-number,
+            .ant-picker {
+                width: 100% !important;
+            }
+
+            .ant-select {
+                display: block !important;
+            }
+        }
+
+        .grid-col-1 {
+            grid-column: span 1 !important;
+        }
+
+        .grid-col-2 {
+            grid-column: span 2 !important;
+        }
+
+        .checkbox-item {
+            display: flex !important;
+            align-items: flex-end !important;
+            padding-bottom: 12px !important;
+
+            .ant-form-item {
+                margin-bottom: 0 !important;
+                width: 100%;
+            }
+
+            > label {
+                display: none !important;
+            }
+
+            .ant-checkbox-wrapper {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                white-space: nowrap;
+            }
+        }
+
+        .section-bhyt-header {
+            grid-column: 1 / span 2 !important;
+            margin-top: 28px !important;
+        }
+
+        .section-bhyt-title {
+            grid-column: span 2 !important;
+            margin-top: 28px !important;
+        }
+    }
+}
+
+// obj field template
+.clinic-form {
+    &__row {
+        margin-bottom: 0;
+
+        &--checkbox {
+            margin-bottom: 12px;
+        }
+    }
+
+    &__col {
+        display: block;
+
+        &--checkbox {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__section-label {
+        color: #1890ff;
+        font-weight: bold;
+        font-size: 14px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+}

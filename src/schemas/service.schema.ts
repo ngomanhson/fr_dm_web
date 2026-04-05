@@ -27,7 +27,7 @@ export const serviceSchema: RJSFSchema = {
         isInactive: { type: "boolean", title: "Ngưng sử dụng", default: false },
         isHighTech: { type: "boolean", title: "Kỹ thuật cao", default: false },
         isReportRequired: { type: "boolean", title: "Bắt buộc nhập TT", default: false },
-        isOutpatient: { type: "boolean", title: "Ngoại trú", default: true },
+        isOutpatient: { type: "boolean", title: "Ngoại trú", default: false },
         isInpatient: { type: "boolean", title: "Nội trú", default: false },
 
         // hàng 5: BHYT

@@ -130,6 +130,8 @@ export default function InputItem({
     return (
         <Form.Item
             name={name}
+            label={label}
+            required={required}
             rules={finalRules}
             valuePropName={valuePropName}
             className={styles["no-margin"]}

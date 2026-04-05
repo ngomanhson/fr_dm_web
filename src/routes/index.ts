@@ -10,6 +10,7 @@ const DashboardPage = lazy(() => import("@/pages/Dashboard"));
 const DistrictPage = lazy(() => import("@/pages/District"));
 const WardPage = lazy(() => import("@/pages/Ward"));
 const ProvincePage = lazy(() => import("@/pages/Province"));
+const ClinicServicePage = lazy(() => import("@/pages/ClinicService"));
 
 // Import auth pages
 const LoginPage = lazy(() => import("@/pages/Auth/Login"));
@@ -19,6 +20,7 @@ const publicRoutes: AppRoute[] = [
     { path: routes.district, component: DistrictPage },
     { path: routes.ward, component: WardPage },
     { path: routes.province, component: ProvincePage },
+    { path: routes.clinic_service, component: ClinicServicePage },
     { path: routes.not_found, component: NotFound },
 ];
 

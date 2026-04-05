@@ -3,6 +3,7 @@ const routes = {
     district: "/districts",
     ward: "/wards",
     province: "/provinces",
+    clinic_service: "/clinic-services",
     login: "/login",
     not_found: "*",
 } as const;

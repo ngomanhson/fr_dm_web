@@ -1,0 +1,35 @@
+.clinic-container {
+    padding: 16px;
+    background: #fff;
+    min-height: 100vh;
+}
+
+.search-section {
+    margin-bottom: 16px;
+
+    :global(.ant-form-item-label > label) {
+        color: #595959;
+        font-weight: 500;
+        height: 24px;
+    }
+}
+
+.search-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+    padding-bottom: 24px;
+}
+
+.table-section {
+    // TODO: move to global style
+    :global {
+        .ant-table-thead > tr > th {
+            background-color: #f0f7ff !important;
+            color: #333;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+    }
+}

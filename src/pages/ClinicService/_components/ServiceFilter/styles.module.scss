@@ -1,0 +1,14 @@
+.service-filter {
+    &__row--second {
+        margin-top: 20px;
+    }
+
+    &__actions {
+        margin-top: 16px;
+    }
+
+    &__actions-wrapper {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

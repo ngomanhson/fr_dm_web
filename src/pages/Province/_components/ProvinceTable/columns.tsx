@@ -1,7 +1,7 @@
 import { Button, Popconfirm, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
-import type { ProvinceType } from "@/mocks/province.data";
+import type { ProvinceType } from "@/types/province.type";
 
 interface Props {
     page: number;

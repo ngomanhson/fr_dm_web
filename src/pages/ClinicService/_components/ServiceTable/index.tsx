@@ -1,0 +1,59 @@
+import type { ClinicService } from "@/pages/ClinicService/_types/clinic.type";
+import { Table } from "antd";
+import { useCallback, useMemo, useState } from "react";
+import { getClinicServiceColumns } from "./columns";
+import PaginationTable from "@/components/PaginationTable";
+
+const ServiceTable = ({ data }: { data: ClinicService[] }) => {
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(15);
+    const total = data.length;
+    const handleEdit = useCallback((record: ClinicService) => {
+        console.log(record);
+    }, []);
+
+    const handleDelete = useCallback((record: ClinicService) => {
+        console.log("delete", record);
+    }, []);
+
+    const columns = useMemo(() => {
+        return getClinicServiceColumns({
+            page,
+            pageSize,
+            onEdit: handleEdit,
+            onDelete: handleDelete,
+        });
+    }, [page, pageSize, handleEdit, handleDelete]);
+
+    const paginatedData = useMemo(() => {
+        return data.slice((page - 1) * pageSize, page * pageSize);
+    }, [data, page, pageSize]);
+
+    return (
+        <>
+            <Table
+                columns={columns}
+                dataSource={paginatedData}
+                bordered
+                rowKey="id"
+                scroll={{ x: "max-content", y: 500 }}
+                pagination={false}
+                locale={{ emptyText: "Không có bản ghi nào thỏa mãn điều kiện tìm kiếm" }}
+            />
+
+            <PaginationTable
+                page={page}
+                setPage={setPage}
+                pageSize={pageSize}
+                setPageSize={(size) => {
+                    setPageSize(size);
+                    setPage(1);
+                }}
+                total={total}
+                isPair={true}
+            />
+        </>
+    );
+};
+
+export default ServiceTable;
